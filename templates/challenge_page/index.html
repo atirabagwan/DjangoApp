@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Challege Registration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<h1 class="text-primary text-center">Challenge Registration</h1>
+		<div class="d-flex justify-content-end">
+		<!-- <button type="button" class="btn btn-primary" href="{% url 'register' %}">Register Challenge</button> -->
+		<li ><a href="{% url 'register' %}" class="btn btn-primary">Register Challenge</a></li>
+		</div>
+		<div class="container">
+			<h2 class="text-danger">All Challenges</h2>
+		</div>
+
+
+		<form class="form-inline" action="/challengeview/" method="GET">
+			{% csrf_token %}
+			<div class="form-group">
+                <label for="sortlabel">Sort : </label>
+				<select  name="sortlabel" >
+			    	<option value="title" selected>Title</option>
+			    	<option value="deadline" >Deadline</option>
+			    </select>
+             </div>
+             <div class="form-group">
+                <label for="order">  Order :</label>
+				<select  name="order" >
+			    	<option value="ascending" selected>Ascending</option>
+			    	<option value="descending" >Descending</option>
+			    </select>
+             </div>
+			<button type="submit" class="btn btn-success">Filter</button>
+		</form>
+
+
+		<div class="container">
+			
+			{% for ch in challenges %}
+				<div class="container">
+					<div class="table table-bordered table-striped">
+						<article class="media content-section">
+						<div class="media-body">
+							<div class="article-metadata">
+								<h4 class="article-title">Title : {{ ch.title }}</h4>
+								<h6> Deadline : {{ ch.deadline }}</h6>
+								<p class="article-content">Tags : {{ ch.tags }}</p>
+							</div>
+						</div>					
+					</article>
+					</div>
+					
+				</div>
+				
+
+			{% endfor %}
+
+		</div>
+
+		<!-- working
+			<div class="container">
+			
+			{% for ch in object_list %}
+				<div class="container">
+					<div class="table table-bordered table-striped">
+						<article class="media content-section">
+						<div class="media-body">
+							<div class="article-metadata">
+								<h4 class="article-title">Title : {{ ch.title }}</h4>
+								<h6> Deadline : {{ ch.deadline }}</h6>
+								<p class="article-content">Tags : {{ ch.tags }}</p>
+							</div>
+						</div>					
+					</article>
+					</div>
+					
+				</div>
+				
+
+			{% endfor %}
+
+		</div> -->
+
+
+		
+	</div>
+	
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  
+
+</body>
+</html>
